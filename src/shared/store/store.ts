@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import meetingsReducer from '../../meeting/hooks/meetingSlice';
+import meetingsReducer from '../../meeting/hooks/meeting.slice';
 
 // Crear store
 export const store = configureStore({

@@ -1,5 +1,7 @@
 import Navbar from '../../shared/components/navbar'
 import { ReactNode } from 'react'
+import { MeetingCard } from '../components/meetingList.card'
+import { Box, Container } from '@mui/material'
 
 interface MeetingsLayoutProps {
   children: ReactNode
@@ -7,11 +9,18 @@ interface MeetingsLayoutProps {
 
 export default function MeetingsLayout() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
       <Navbar />
-      <main className="container mx-auto px-4 py-8">
-        
-      </main>
-    </div>
+      <Container sx={{ py: 8 }}>
+        <MeetingCard _id="123" chatHistory={[]} transcription={{
+                  speakers: [],
+                  messages: []
+              }} />
+        <MeetingCard _id="123" chatHistory={[]} transcription={{
+                  speakers: [],
+                  messages: []
+              }} />
+      </Container>
+    </Box>
   )
 }
