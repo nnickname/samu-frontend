@@ -24,7 +24,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --verbose --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker:build": "docker build -t meeting-frontend .",
+    "docker:run": "docker run -p 3000:3000 meeting-frontend",
+    "docker:stop": "docker stop meeting-frontend",
+    "docker:clean": "docker rm meeting-frontend"
   },
   "eslintConfig": {
     "extends": [
