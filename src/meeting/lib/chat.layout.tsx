@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useParams } from 'react-router-dom';
 import { Box, TextField, Button, Paper, Typography } from '@mui/material';
 import Navbar from '../../shared/components/navbar';
 import ChatMessage from '../components/ChatMessage';
-import { IChatMessage, IMeeting } from '../types/meeting';
+import { IChatMessage } from '../types/meeting';
 import { RootState } from '../../shared/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMeetingRepository } from '../hooks/meeting.repository';
-import { setMeetings } from '../hooks/meeting.slice';
 
 const ChatLayout: React.FC = () => {
   const { getMeetingById, sendQuestion } = useMeetingRepository();

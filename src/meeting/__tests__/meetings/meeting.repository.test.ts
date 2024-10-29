@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
-import { useMeetingRepository } from '../hooks/meeting.repository';
-import * as sharedHooks from '../../shared/hooks/useRepository';
+import { useMeetingRepository } from '../../hooks/meeting.repository';
+import * as sharedHooks from '../../../shared/hooks/useRepository';
 import dotenv from 'dotenv'
 
 // Asegúrate de que dotenv se configure antes de cualquier otra operación
@@ -56,5 +56,21 @@ describe('useMeetingRepository', () => {
     // Assert
     expect(mockPost).toHaveBeenCalledWith('/api/meeting', {});
     expect(newMeeting).toEqual(mockNewMeeting);
+  });
+
+  it('should send question successfully', async () => {
+    // Arrange
+    const mockResponse = { success: true, answer: 'Test answer' };
+    const meetingId = '67206efe98f309711b33ea31';
+    const question = 'Test question';
+    mockPost.mockResolvedValueOnce(mockResponse);
+    
+    // Act
+    const { result } = renderHook(() => useMeetingRepository());
+    const response = await result.current.sendQuestion(meetingId, question);
+    
+    // Assert
+    expect(mockPost).toHaveBeenCalledWith(`/api/meeting/${meetingId}/chat`, { question });
+    expect(response).toEqual(mockResponse);
   });
 }); 
