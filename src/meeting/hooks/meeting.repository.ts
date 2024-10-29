@@ -20,9 +20,15 @@ export const useMeetingRepository = () => {
     return data as IMeeting;
   };
 
+  const sendQuestion = async (meetingId: string, question: string): Promise<IMeeting> => {
+    const data = await post(`/api/meeting/${meetingId}/chat`, { question });
+    return data as IMeeting;
+  };
+
   return {
     getMeetingById,
     getAllMeetings,
     createMeeting,
+    sendQuestion,
   };
 };
