@@ -1,5 +1,5 @@
 import { useRepository } from '../../shared/hooks/useRepository';
-import { IMeeting } from '../types/meeting';
+import { IChatMessage, IMeeting } from '../types/meeting';
 
 export const useMeetingRepository = () => {
   const { get, post } = useRepository();
@@ -20,9 +20,9 @@ export const useMeetingRepository = () => {
     return data as IMeeting;
   };
 
-  const sendQuestion = async (meetingId: string, question: string): Promise<IMeeting> => {
+  const sendQuestion = async (meetingId: string, question: string): Promise<IChatMessage> => {
     const data = await post(`/api/meeting/${meetingId}/chat`, { question });
-    return data as IMeeting;
+    return data as IChatMessage;
   };
 
   return {

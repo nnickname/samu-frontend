@@ -35,14 +35,24 @@ export default function MeetingsLayout() {
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
       <Navbar />
       <Container sx={{ py: 8 }}>
-        {!isLoading && meetings?.map((meeting) => (
-          <MeetingCard 
-            key={meeting._id}
-            _id={meeting._id}
-            chatHistory={meeting.chatHistory}
-            transcription={meeting.transcription}
-          />
-        ))}
+        {isLoading ? (
+          <Box sx={{ textAlign: 'center', py: 4 }}>
+            <p>Cargando conversaciones...</p>
+          </Box>
+        ) : meetings && meetings.length > 0 ? (
+          meetings.map((meeting) => (
+            <MeetingCard 
+              key={meeting._id}
+              _id={meeting._id}
+              chatHistory={meeting.chatHistory}
+              transcription={meeting.transcription}
+            />
+          ))
+        ) : (
+          <Box sx={{ textAlign: 'center', py: 4 }}>
+            <p>No hay conversaciones disponibles</p>
+          </Box>
+        )}
       </Container>
     </Box>
   )

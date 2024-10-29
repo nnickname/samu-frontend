@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './shared/store/store';
 import { ThemeProvider, createTheme } from '@mui/material';
 import MeetingsLayout from './meeting/lib/meetings.layout';
-
+import ChatLayout from './meeting/lib/chat.layout';
 
 const theme = createTheme({
   palette: {
@@ -67,7 +67,7 @@ const App: React.FC = () => {
         <div className="min-h-screen bg-gray-100">
           <Routes>
             <Route path="/" element={<MeetingsLayout/>} />
-            {/* Aquí puedes agregar más rutas según necesites */}
+            <Route path="/chat/:meetingId" element={<ChatLayout/>} />
           </Routes>
         </div>
       </ThemeProvider>
