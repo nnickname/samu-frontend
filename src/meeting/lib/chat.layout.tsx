@@ -65,12 +65,27 @@ const ChatLayout: React.FC = () => {
             overflow: 'auto'
           }}
         >
-          {messages!.map((message, index) => (
-            <ChatMessage
-              key={index}
-              message={message}
-            />
-          ))}
+          {messages.length > 0 ? (
+            messages.map((message, index) => (
+              <ChatMessage
+                key={index}
+                message={message}
+              />
+            ))
+          ) : (
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 1 }}>
+              <Paper sx={{ 
+                p: 2,
+                maxWidth: '70%',
+                bgcolor: '#f5f5f5',
+                borderRadius: '20px 20px 20px 0'
+              }}>
+                <Typography variant="body1">
+                  ¿En qué puedo ayudarte hoy?
+                </Typography>
+              </Paper>
+            </Box>
+          )}
         </Paper>
         
         <Box sx={{ display: 'flex', gap: 1 }}>

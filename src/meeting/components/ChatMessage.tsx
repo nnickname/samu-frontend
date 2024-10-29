@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Paper, Typography } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import { IChatMessage } from '../types/meeting';
 
 interface ChatMessageProps {
@@ -43,7 +44,13 @@ const ChatMessage: React.FC<ChatMessageProps> = ({message }) => {
             borderRadius: '20px 20px 20px 0'
           }}
         >
-          <Typography>{message.answer}</Typography>
+          {message.answer ? (
+            <Typography>{message.answer}</Typography>
+          ) : (
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <CircularProgress size={24} />
+            </Box>
+          )}
         </Paper>
       </Box>
     </Box>
