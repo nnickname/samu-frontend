@@ -3,18 +3,19 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Box, TextField, Button, Paper, Typography } from '@mui/material';
 import Navbar from '../../shared/components/navbar';
 import ChatMessage from '../components/ChatMessage';
-import { IChatMessage } from '../types/meeting';
+import { IChatMessage, IMeeting } from '../types/meeting';
 import { RootState } from '../../shared/store/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMeetingRepository } from '../hooks/meeting.repository';
+import { setMeetings } from '../hooks/meeting.slice';
 
 const ChatLayout: React.FC = () => {
-  const { getMeetingById } = useMeetingRepository();
+  const { getMeetingById, sendQuestion } = useMeetingRepository();
   const { meetingId } = useParams<{ meetingId: string }>();
   const meetings = useSelector((state: RootState) => state.meetings);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<IChatMessage[]>([]);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     
     const fetchMeeting = async () => {
@@ -42,8 +43,8 @@ const ChatLayout: React.FC = () => {
     setInput('');
 
     try {
-      // Aquí implementaremos la llamada al endpoint de OpenAI
-      // usando el repository que ya tienes
+      const updatedMeeting = await sendQuestion(meetingId ?? '', input);
+      setMessages([...messages, updatedMeeting]);
     } catch (error) {
       console.error('Error al enviar mensaje:', error);
     }
@@ -64,7 +65,7 @@ const ChatLayout: React.FC = () => {
             overflow: 'auto'
           }}
         >
-          {messages.map((message, index) => (
+          {messages!.map((message, index) => (
             <ChatMessage
               key={index}
               message={message}
