@@ -1,7 +1,20 @@
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useMeetingRepository } from '../../meeting/hooks/meeting.repository';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { createMeeting } = useMeetingRepository();
+  const handleCreateMeeting = async () => {
+    try {
+      const meeting = await createMeeting();
+      console.log(meeting);
+      //navigate(`/meeting/${meetingId}`);
+    } catch (error) {
+      console.error('Error creating meeting:', error);
+    }
+  };
+
   return (
     <AppBar sx={{ backgroundColor: '#fff' }} position="static">
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -16,8 +29,7 @@ const Navbar = () => {
         {/* Botón Crear Meeting */}
         <Button 
           color="primary" 
-          component={Link} 
-          to="/crear-meeting"
+          onClick={handleCreateMeeting}
         >
           Crear Meeting
         </Button>
