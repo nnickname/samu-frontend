@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import MeetingsLayout from '../../lib/meetings.layout';
-import ChatLayout from '../../lib/chat.layout';
-import { store } from '../../../shared/store/store';
 import { Provider } from 'react-redux';
 import { MemoryRouter as Router } from "react-router-dom";
+import { store } from '../../shared/store/store';
+import ChatLayout from '../lib/chat.layout';
+import MeetingsLayout from '../lib/meetings.layout';
 
 describe('MeetingsLayout', () => {
   it('should display loading message when component is mounted', () => {

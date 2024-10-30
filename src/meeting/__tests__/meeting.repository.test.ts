@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
-import { useMeetingRepository } from '../../hooks/meeting.repository';
-import * as sharedHooks from '../../../shared/hooks/useRepository';
+import { useMeetingRepository } from '../hooks/meeting.repository';
+import * as sharedHooks from '../../shared/hooks/useRepository';
 import dotenv from 'dotenv'
 
 // Asegúrate de que dotenv se configure antes de cualquier otra operación
