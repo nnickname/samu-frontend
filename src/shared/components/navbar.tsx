@@ -9,7 +9,7 @@ const Navbar = () => {
     try {
       const meeting = await createMeeting();
       console.log(meeting);
-      //navigate(`/meeting/${meetingId}`);
+      navigate(`/chat/${meeting._id}`);
     } catch (error) {
       console.error('Error creating meeting:', error);
     }
